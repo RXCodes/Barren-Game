@@ -7,6 +7,7 @@ var targetVelocity: Vector2
 var wormEnemy: EnemyAI
 var canHitObstacles = true
 var enemyColor: Color
+var damage = 20
 
 func refreshColor() -> void:
 	if wormEnemy.variantType == EnemyAI.EnemyVariantType.ACID:
@@ -17,6 +18,7 @@ func refreshColor() -> void:
 		enemyColor =  Color("#ff0000")
 	if wormEnemy.variantType == EnemyAI.EnemyVariantType.NORMAL:
 		enemyColor =  Color("#7cb5eb")
+	damage *= wormEnemy.damageMultiplier
 
 var hasExploded = false
 func explode() -> void:
@@ -25,9 +27,12 @@ func explode() -> void:
 	hasExploded = true
 	
 	# create explosion and change color based on enemy type
-	var damage = 20 * wormEnemy.damageMultiplier
 	var explosion = Explosion.create($RigidBody2D/Fireball.global_position, damage, EnemyAI.HurtBoxType.PLAYER, enemyColor)
-	explosion.enemySource = wormEnemy
+	if is_instance_valid(wormEnemy):
+		explosion.enemySource = wormEnemy
+	else:
+		explosion.enemySource = Player.current
+	
 	queue_free()
 
 # determines the trajectory of the fireball - assume this is called on start as intended

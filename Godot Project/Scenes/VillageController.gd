@@ -345,8 +345,8 @@ static func addNodeToGridGroup(node: Node2D) -> void:
 		node.process_mode = Node.PROCESS_MODE_DISABLED
 
 static func gridGroupForPosition(position: Vector2) -> String:
-	var x = round(position.x / gridSize)
-	var y = round(position.y / gridSize)
+	var x = round(position.x / gridSize) + 0
+	var y = round(position.y / gridSize) + 0
 	return str(x) + "G" + str(y)
 
 static func gridPositionForPosition(position: Vector2) -> Vector2:
@@ -374,8 +374,8 @@ static func processGridGroups() -> void:
 	var targetRangeSquared = (Player.current.pickUpRangeMultiplier * 500) ** 2
 	
 	# find grid groups to activate
-	for x in range(-targetRange, targetRange, gridSize):
-		for y in range(-targetRange, targetRange, gridSize):
+	for x in range(-targetRange - gridSize, targetRange + gridSize, gridSize):
+		for y in range(-targetRange - gridSize, targetRange + gridSize, gridSize):
 			var gridPosition = playerPosition + Vector2(x, y)
 			if gridPosition.distance_squared_to(playerPosition) <= targetRangeSquared:
 				activateGridGroup(gridPosition)
