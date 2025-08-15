@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://m0m804nb1dp2"]
+
+[ext_resource type="Script" path="res://Upgrades/ExplosiveBullets.gd" id="1_6cv0b"]
+[ext_resource type="Texture2D" uid="uid://c6afik7gnbmyw" path="res://Upgrades/ExplosiveBullets.png" id="2_lwmnp"]
+
+[node name="ExplosiveBullets" type="Node"]
+script = ExtResource("1_6cv0b")
+upgradeName = "Explosive Bullets"
+description = "Some of your bullets can explode, dealing damage to nearby enemies"
+accumativeDescription = "chance for bullets to explode when hitting enemies"
+preferredUpgradeAmounts = Array[float]([1.0])
+upgradeIdentifier = "explosiveBullets"
+texture = ExtResource("2_lwmnp")
+stackable = false
+minRandomUpgradeAmountMultiplier = 1.0
+maxRandomUpgradeAmountMultiplier = 1.0

@@ -439,7 +439,7 @@ offset_top = 768.0
 offset_right = 188.0
 offset_bottom = 790.0
 mouse_filter = 1
-text = "v1.1 release"
+text = "v1.2 release"
 label_settings = ExtResource("8_4nxs1")
 
 [node name="StartGame" type="Label" parent="GameButtons"]

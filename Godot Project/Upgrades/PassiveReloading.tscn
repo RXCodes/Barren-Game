@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bymdpthkntke0"]
+
+[ext_resource type="Script" path="res://Upgrades/PassiveReloading.gd" id="1_fi8ll"]
+[ext_resource type="Texture2D" uid="uid://d3dpf22pbygq7" path="res://Upgrades/PassiveReloading.png" id="2_g2yeb"]
+
+[node name="PassiveReloading" type="Node"]
+script = ExtResource("1_fi8ll")
+upgradeName = "Passive Reloading"
+description = "Your offhand weapon will slowly reload over time"
+accumativeDescription = "Offhand weapon reloads over time"
+preferredUpgradeAmounts = Array[float]([1.0])
+upgradeIdentifier = "passiveReloading"
+texture = ExtResource("2_g2yeb")
+stackable = false
+minRandomUpgradeAmountMultiplier = 1.0
+maxRandomUpgradeAmountMultiplier = 1.0

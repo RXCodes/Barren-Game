@@ -34,6 +34,8 @@ static func _static_init() -> void:
 static func spawnItem(identifier: String, amount: int, position: Vector2) -> Item:
 	if identifier not in itemData.keys():
 		return
+	if amount <= 0:
+		return
 	var newItem: Item = preload("res://Items/Item.tscn").instantiate()
 	newItem.setupWithItemEntity(itemData[identifier])
 	newItem.entity.amount = amount

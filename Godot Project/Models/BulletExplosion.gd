@@ -1,4 +1,4 @@
-class_name Explosion extends Node2D
+class_name BulletExplosion extends Node2D
 
 var isFromPlayer = false
 var enemySource: EnemyAI:
@@ -6,8 +6,8 @@ var enemySource: EnemyAI:
 		set_meta(EnemyAI.parentControllerKey, newSource)
 		enemySource = newSource
 
-static func create(position: Vector2, damage: float, hurtBoxType: EnemyAI.HurtBoxType, color: Color = Color("f2d862")) -> Explosion:
-	var explosion: Explosion = preload("res://Models/Explosion.tscn").instantiate()
+static func create(position: Vector2, damage: float, hurtBoxType: EnemyAI.HurtBoxType, color: Color = Color("f2d862")) -> BulletExplosion:
+	var explosion: BulletExplosion = preload("res://Models/BulletExplosion.tscn").instantiate()
 	explosion.global_position = position
 	explosion.color = color
 	NodeRelations.rootNode.find_child("Level").add_child(explosion)
@@ -18,21 +18,20 @@ static func create(position: Vector2, damage: float, hurtBoxType: EnemyAI.HurtBo
 var color: Color
 func _ready() -> void:
 	var flash = $Flash
-	$Sound.pitch_scale = randf_range(0.5, 1.25)
 	flash.self_modulate = color
 	var distanceToPlayer = Player.current.global_position.distance_to(global_position)
-	var shakeIntensity = 40 - (distanceToPlayer * 0.035)
+	var shakeIntensity = 20 - (distanceToPlayer * 0.035)
 	if shakeIntensity > 0:
 		PlayerCamera.current.shakeScreen(shakeIntensity, 3.0)
 	var tween = NodeRelations.createTween()
 	tween.tween_property(flash, "modulate", Color.TRANSPARENT, 0.25)
 	$Blast.emitting = true
 	await get_tree().physics_frame
-	for i in range(8):
+	for i in range(3):
 		var fragmentPosition = global_position
-		fragmentPosition.x += randfn(0, 40)
-		fragmentPosition.y += randfn(0, 25)
-		ExplosionFragment.create(fragmentPosition, color)
+		fragmentPosition.x += randfn(0, 30)
+		fragmentPosition.y += randfn(0, 20)
+		BulletExplosionFragment.create(fragmentPosition, color)
 	await TimeManager.wait(10.0)
 	queue_free()
 

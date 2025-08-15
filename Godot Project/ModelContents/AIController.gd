@@ -291,6 +291,11 @@ func damage(amount: float, source: Node2D) -> void:
 				burnNodeSource = Player.current
 				burningTime = 10
 		
+		# explosive bullets effect
+		if Player.current.explosiveBullets:
+			if randi_range(1, 10) == 1:
+				BulletExplosion.create(getPosition(), 50, EnemyAI.HurtBoxType.ENEMY, Player.current.gunInteractor.currentWeapon.bulletFireColor)
+		
 	if source is Explosion:
 		if source.isFromPlayer:
 			var criticalChance = randf_range(0, Player.current.criticalDamageMultiplier)
@@ -632,6 +637,11 @@ func kill() -> void:
 		var lifestealEntity = EnemySpawner.spawnEnemy("LifestealEntity", global_position)
 		lifestealEntity.healthIncrease = Player.current.lifestealAmount
 	get_parent().queue_free()
+	
+	# enemy can explode on death with explosive bullets
+	if Player.current.explosiveBullets:
+			if randi_range(1, 20) == 1:
+				Explosion.create(getPosition(), 50, EnemyAI.HurtBoxType.ENEMY, Player.current.gunInteractor.currentWeapon.bulletFireColor)
 
 enum HurtBoxType {PLAYER, ENEMY, ALL}
 

@@ -153,22 +153,22 @@ var baseReloadTimeMultiplier = 1.0
 
 @export_group("Golden Rarity Property Overrides")
 
-## how much to multiply the spread for silver rarity
+## how much to multiply the spread for golden rarity
 @export var goldenTargetSpreadMultiplier: float = 0.8
 
-## how much to multiply the damage for silver rarity
+## how much to multiply the damage for golden rarity
 @export var goldenTargetDamageMultiplier: float = 2.0
 
-## how much to multiply the firing rate for silver rarity
+## how much to multiply the firing rate for golden rarity
 @export var goldenFireRateMultiplier: float = 0.75
 
-## how much to multiply the reload time for silver rarity
+## how much to multiply the reload time for golden rarity
 @export var goldenReloadTimeMultiplier: float = 0.5
 
-## how much to increase the magazine size for silver rarity
+## how much to increase the magazine size for golden rarity
 @export var goldenMagazineSizeIncrease: int = 20
 
-## how much to increase the bullet multiplier for silver rarity
+## how much to increase the bullet multiplier for golden rarity
 @export var goldenBulletMultiplierIncrease: int = 0
 
 var canFire = true
@@ -232,6 +232,13 @@ func fire(holding: bool, angleRadians: float) -> void:
 		Bullet.fire(gunInteractor.originNode.global_position, angleRadians, self, sourceNode, gunInteractor.sourcePositionOffset)
 	await TimeManager.wait(fireRate / gunInteractor.fireRateDivisor)
 	canFire = true
+
+func reloadAmount(count: int):
+	var lastMagCapacity = currentMagCapacity
+	currentMagCapacity += min(count, leftoverAmmoCount)
+	currentMagCapacity = min(currentMagCapacity, maximumMagCapacity)
+	var ammoTaken = currentMagCapacity - lastMagCapacity
+	leftoverAmmoCount -= ammoTaken
 
 var reloadAudioPlayer: AudioStreamPlayer2D
 func playReloadSound() -> void:

@@ -88,6 +88,7 @@ var animationValues = {
 }
 
 var sprintBarHidden = true
+var passiveReloadTimer = 0.0
 func _process(delta: float) -> void:
 	# interrupt controls if needed
 	if GamePopup.current or TutorialManager.shouldDisableControls:
@@ -150,6 +151,20 @@ func _process(delta: float) -> void:
 		sprintBar.startFlashing()
 	else:
 		sprintBar.stopFlashing()
+	
+	# passive reload functionality
+	if passiveReloading:
+		var otherWeapon: Gun
+		if currentWeaponSlot == 1:
+			if (holdingWeapons.size() > 1):
+				otherWeapon = holdingWeapons[1]
+		else:
+			otherWeapon = holdingWeapons[0]
+		if otherWeapon:
+			passiveReloadTimer -= delta
+			if passiveReloadTimer <= 0:
+				otherWeapon.reloadAmount(clamp(ceil(otherWeapon.maximumMagCapacity / 10.0), 1, 10))
+				passiveReloadTimer = 2.5
 
 var walking = false
 var walkingBackwards = false
@@ -176,6 +191,8 @@ var compoundInterest: float = 0.0
 var lifestealAmount: float = 0.0
 var unlimitedSprint: bool = false
 var flamingBullets: bool = false
+var passiveReloading: bool = false
+var explosiveBullets: bool = false
 
 # statistics
 var totalCashEarned: int = 0
@@ -509,6 +526,10 @@ func damage(amount: float, source: Node2D) -> void:
 		invicibilityFrame = true
 		await TimeManager.wait(0.4)
 		invicibilityFrame = false
+
+func playUIAudio(stream: AudioStream):
+	$UISound.stream = stream
+	$UISound.play()
 
 # called when player dies
 var shouldRestartScene: bool = false

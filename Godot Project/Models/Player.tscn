@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://brwc5onyibsfh"]
+[gd_scene load_steps=77 format=3 uid="uid://brwc5onyibsfh"]
 
 [ext_resource type="Script" path="res://ModelContents/EntityRenderer.gd" id="1_t84kj"]
 [ext_resource type="Script" path="res://ModelContents/Player/PlayerController.gd" id="2_opaao"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://c06jw6owawlfb" path="res://WeaponsContents/ScarL/Scar-L.png" id="36_bdg1a"]
 [ext_resource type="Texture2D" uid="uid://chovwx8jfvyjd" path="res://WeaponsContents/ScarL/ScarLReloading.png" id="37_b6xw2"]
 [ext_resource type="Texture2D" uid="uid://cp87rykxd2wc6" path="res://WeaponsContents/UMP45/UMP45Reloading.png" id="38_g84bq"]
+[ext_resource type="AudioStream" uid="uid://cll5rptmlymbh" path="res://UI/SupplyDrop.mp3" id="39_esiug"]
 [ext_resource type="Texture2D" uid="uid://en1jqkucn5ip" path="res://WeaponsContents/UMP45/UMP45.png" id="39_h5bj3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_12evv"]
@@ -838,6 +839,84 @@ tracks/5/keys = {
 "values": [Vector2(-16, 5), Vector2(-16, -5)]
 }
 
+[sub_resource type="Animation" id="Animation_lpv1q"]
+resource_name = "Fire-GrenadeLauncher"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Left Hand Target:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-17, 0), Vector2(-13.2368, -1.6128), Vector2(-11.4947, -2.35942), Vector2(-10.6882, -2.70506), Vector2(-10.3148, -2.86507), Vector2(-10.142, -2.93915), Vector2(-10.062, -2.97344), Vector2(-10.0249, -2.98932), Vector2(-10.0078, -2.99667), Vector2(-10, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Right Hand Target:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(27, 13), Vector2(36.2238, 34.083), Vector2(34.0872, 29.1994), Vector2(33.468, 27.784), Vector2(34.3193, 29.7299), Vector2(33.9111, 28.7968), Vector2(33.988, 28.9727), Vector2(34.0266, 29.0609), Vector2(33.9856, 28.9672), Vector2(34, 29)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Skeleton2D/Torso:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.353553, 1),
+"update": 0,
+"values": [-1.65806, -1.5708]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["dropShell"],
+"method": &"callGunMethod"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Skeleton2D/Torso/Left Elbow/Left Arm/Left Hand/RemoteTransform2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Skeleton2D/Torso/Right Elbow/Right Arm/Right Hand/RemoteTransform2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-16, 5), Vector2(-16, 1.57211), Vector2(-16, -1.05485), Vector2(-16, -3.22509), Vector2(-16, -4.93557), Vector2(-16, -5.81044), Vector2(-16, -5.48372), Vector2(-16, -4.75024), Vector2(-16, -5.00806), Vector2(-16, -5)]
+}
+
 [sub_resource type="Animation" id="Animation_o7jun"]
 resource_name = "Fire-MachineGun"
 length = 0.15
@@ -1232,6 +1311,108 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_r4c5n"]
+resource_name = "Reload-GrenadeLauncher"
+length = 3.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Left Hand Target:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.666667, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-10, -3), Vector2(-5.50289, -2.59117), Vector2(-2.23618, -2.2942), Vector2(-0.0215454, -2.09287), Vector2(1.3193, -1.97097), Vector2(1.96467, -1.9123), Vector2(2.09287, -1.90065), Vector2(1.8822, -1.9198), Vector2(1.51096, -1.95355), Vector2(1.15746, -1.98569), Vector2(1, -2), Vector2(-5, -1), Vector2(-5, -1), Vector2(-5.92157, -1.36863), Vector2(-6.71395, -1.68558), Vector2(-7.40691, -1.96276), Vector2(-8.02743, -2.21097), Vector2(-8.59381, -2.43753), Vector2(-9.11254, -2.64502), Vector2(-9.577, -2.8308), Vector2(-9.96779, -2.98711), Vector2(-10.2551, -3.10203), Vector2(-10.4052, -3.16209), Vector2(-10.3958, -3.15832), Vector2(-10.2419, -3.09674), Vector2(-10.0232, -3.0093), Vector2(-9.87512, -2.95005), Vector2(-9.89278, -2.95711), Vector2(-10.004, -3.00161), Vector2(-10.0419, -3.01677), Vector2(-10, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Right Hand Target:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.6, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1.03333, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.46667, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.9, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.33333, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.66667, 2.7, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(34, 29), Vector2(36.7912, 18.882), Vector2(38.9459, 11.0711), Vector2(40.5393, 5.29512), Vector2(41.6463, 1.2821), Vector2(42.3421, -1.24), Vector2(42.7016, -2.54323), Vector2(42.7999, -2.89961), Vector2(42.712, -2.58117), Vector2(42.5131, -1.85996), Vector2(42.2781, -1.00801), Vector2(42.082, -0.297338), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(40.5255, 5.3451), Vector2(39.2577, 9.94088), Vector2(38.1489, 13.9601), Vector2(37.1561, 17.5591), Vector2(36.2499, 20.8441), Vector2(35.4199, 23.8527), Vector2(34.6768, 26.5466), Vector2(34.0515, 28.8132), Vector2(33.5919, 30.4795), Vector2(33.3516, 31.3503), Vector2(33.3667, 31.2957), Vector2(33.613, 30.4028), Vector2(33.9628, 29.1348), Vector2(34.1998, 28.2757), Vector2(34.1716, 28.3781), Vector2(33.9936, 29.0234), Vector2(33.9329, 29.2432), Vector2(34, 29)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Skeleton2D/Torso:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.5708, -1.74533, -1.8326, -1.78434, -1.74286, -1.70657, -1.67408, -1.64443, -1.61727, -1.59295, -1.57249, -1.55744, -1.54958, -1.55008, -1.55814, -1.56958, -1.57734, -1.57641, -1.57059, -1.5686, -1.5708]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["playReloadSound"],
+"method": &"callGunMethod"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Skeleton2D/Torso/Left Elbow/Left Arm/Left Hand/RemoteTransform2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 1.03333, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.46667, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.9, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.33333, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Skeleton2D/Torso/Right Elbow/Right Arm/Right Hand/RemoteTransform2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.433333, 0.6, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-16, -5), Vector2(-16, -5), Vector2(-16, 10), Vector2(-16, 10), Vector2(-16, 7.23529), Vector2(-16, 4.85816), Vector2(-16, 2.77928), Vector2(-16, 0.917719), Vector2(-16, -0.781446), Vector2(-16, -2.33763), Vector2(-16, -3.73099), Vector2(-16, -4.90336), Vector2(-16, -5.76524), Vector2(-16, -6.21567), Vector2(-16, -6.18742), Vector2(-16, -5.72558), Vector2(-16, -5.06974), Vector2(-16, -4.62535), Vector2(-16, -4.67833), Vector2(-16, -5.01209), Vector2(-16, -5.1258), Vector2(-16, -5)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Torso/Coat/LeftElbow/Weapon/RightHand:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.466667, 2.76667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../Skeleton2D/Torso/Head/RemoteTransform2D:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0333333, 0.166667, 2.63333, 2.8, 2.93333, 3.06667, 3.2, 3.36667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.5708, 1.309, 1.5708, 1.5708, 1.39626, 1.5708, 1.39626, 1.5708]
+}
+
 [sub_resource type="Animation" id="Animation_5ug3w"]
 resource_name = "Reload-MachineGun"
 length = 5.6
@@ -1590,186 +1771,6 @@ tracks/5/keys = {
 "values": [ExtResource("38_g84bq"), ExtResource("39_h5bj3")]
 }
 
-[sub_resource type="Animation" id="Animation_lpv1q"]
-resource_name = "Fire-GrenadeLauncher"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Left Hand Target:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-17, 0), Vector2(-13.2368, -1.6128), Vector2(-11.4947, -2.35942), Vector2(-10.6882, -2.70506), Vector2(-10.3148, -2.86507), Vector2(-10.142, -2.93915), Vector2(-10.062, -2.97344), Vector2(-10.0249, -2.98932), Vector2(-10.0078, -2.99667), Vector2(-10, -3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Right Hand Target:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(27, 13), Vector2(36.2238, 34.083), Vector2(34.0872, 29.1994), Vector2(33.468, 27.784), Vector2(34.3193, 29.7299), Vector2(33.9111, 28.7968), Vector2(33.988, 28.9727), Vector2(34.0266, 29.0609), Vector2(33.9856, 28.9672), Vector2(34, 29)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/Torso:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.353553, 1),
-"update": 0,
-"values": [-1.65806, -1.5708]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["dropShell"],
-"method": &"callGunMethod"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/Torso/Left Elbow/Left Arm/Left Hand/RemoteTransform2D:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.0872665, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../Skeleton2D/Torso/Right Elbow/Right Arm/Right Hand/RemoteTransform2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-16, 5), Vector2(-16, 1.57211), Vector2(-16, -1.05485), Vector2(-16, -3.22509), Vector2(-16, -4.93557), Vector2(-16, -5.81044), Vector2(-16, -5.48372), Vector2(-16, -4.75024), Vector2(-16, -5.00806), Vector2(-16, -5)]
-}
-
-[sub_resource type="Animation" id="Animation_r4c5n"]
-resource_name = "Reload-GrenadeLauncher"
-length = 3.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Left Hand Target:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.666667, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-10, -3), Vector2(-5.50289, -2.59117), Vector2(-2.23618, -2.2942), Vector2(-0.0215454, -2.09287), Vector2(1.3193, -1.97097), Vector2(1.96467, -1.9123), Vector2(2.09287, -1.90065), Vector2(1.8822, -1.9198), Vector2(1.51096, -1.95355), Vector2(1.15746, -1.98569), Vector2(1, -2), Vector2(-5, -1), Vector2(-5, -1), Vector2(-5.92157, -1.36863), Vector2(-6.71395, -1.68558), Vector2(-7.40691, -1.96276), Vector2(-8.02743, -2.21097), Vector2(-8.59381, -2.43753), Vector2(-9.11254, -2.64502), Vector2(-9.577, -2.8308), Vector2(-9.96779, -2.98711), Vector2(-10.2551, -3.10203), Vector2(-10.4052, -3.16209), Vector2(-10.3958, -3.15832), Vector2(-10.2419, -3.09674), Vector2(-10.0232, -3.0093), Vector2(-9.87512, -2.95005), Vector2(-9.89278, -2.95711), Vector2(-10.004, -3.00161), Vector2(-10.0419, -3.01677), Vector2(-10, -3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Right Hand Target:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.6, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1.03333, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.46667, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.9, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.33333, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.66667, 2.7, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(34, 29), Vector2(36.7912, 18.882), Vector2(38.9459, 11.0711), Vector2(40.5393, 5.29512), Vector2(41.6463, 1.2821), Vector2(42.3421, -1.24), Vector2(42.7016, -2.54323), Vector2(42.7999, -2.89961), Vector2(42.712, -2.58117), Vector2(42.5131, -1.85996), Vector2(42.2781, -1.00801), Vector2(42.082, -0.297338), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(46, -36), Vector2(44.6288, -23.6596), Vector2(43.5781, -14.2025), Vector2(42.71, -6.38968), Vector2(42.0258, -0.23193), Vector2(41.6758, 2.9176), Vector2(41.8065, 1.74139), Vector2(42.0999, -0.899151), Vector2(41.9968, 0.0290222), Vector2(42, 0), Vector2(42, 0), Vector2(40.5255, 5.3451), Vector2(39.2577, 9.94088), Vector2(38.1489, 13.9601), Vector2(37.1561, 17.5591), Vector2(36.2499, 20.8441), Vector2(35.4199, 23.8527), Vector2(34.6768, 26.5466), Vector2(34.0515, 28.8132), Vector2(33.5919, 30.4795), Vector2(33.3516, 31.3503), Vector2(33.3667, 31.2957), Vector2(33.613, 30.4028), Vector2(33.9628, 29.1348), Vector2(34.1998, 28.2757), Vector2(34.1716, 28.3781), Vector2(33.9936, 29.0234), Vector2(33.9329, 29.2432), Vector2(34, 29)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Skeleton2D/Torso:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [-1.5708, -1.74533, -1.8326, -1.78434, -1.74286, -1.70657, -1.67408, -1.64443, -1.61727, -1.59295, -1.57249, -1.55744, -1.54958, -1.55008, -1.55814, -1.56958, -1.57734, -1.57641, -1.57059, -1.5686, -1.5708]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["playReloadSound"],
-"method": &"callGunMethod"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Skeleton2D/Torso/Left Elbow/Left Arm/Left Hand/RemoteTransform2D:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 1.03333, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.46667, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.9, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.33333, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, -0.0872665, -0.0502616, -0.0231981, -0.00235205, 0.00731516, 0.000934499, -0.00105443, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../Skeleton2D/Torso/Right Elbow/Right Arm/Right Hand/RemoteTransform2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.433333, 0.6, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3, 3.03333, 3.06667, 3.1, 3.13333, 3.16667, 3.2, 3.23333, 3.26667, 3.3, 3.33333, 3.36667, 3.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-16, -5), Vector2(-16, -5), Vector2(-16, 10), Vector2(-16, 10), Vector2(-16, 7.23529), Vector2(-16, 4.85816), Vector2(-16, 2.77928), Vector2(-16, 0.917719), Vector2(-16, -0.781446), Vector2(-16, -2.33763), Vector2(-16, -3.73099), Vector2(-16, -4.90336), Vector2(-16, -5.76524), Vector2(-16, -6.21567), Vector2(-16, -6.18742), Vector2(-16, -5.72558), Vector2(-16, -5.06974), Vector2(-16, -4.62535), Vector2(-16, -4.67833), Vector2(-16, -5.01209), Vector2(-16, -5.1258), Vector2(-16, -5)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../Torso/Coat/LeftElbow/Weapon/RightHand:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.466667, 2.76667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("../Skeleton2D/Torso/Head/RemoteTransform2D:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0.0333333, 0.166667, 2.63333, 2.8, 2.93333, 3.06667, 3.2, 3.36667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [1.5708, 1.309, 1.5708, 1.5708, 1.39626, 1.5708, 1.39626, 1.5708]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_guau6"]
 _data = {
 "Cock-Shotgun": SubResource("Animation_iueme"),
@@ -1910,14 +1911,14 @@ scale = Vector2(0.999831, 0.999831)
 texture = ExtResource("4_7ekww")
 
 [node name="RightLeg" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso"]
-position = Vector2(0.0112278, 0.0112267)
-rotation = 0.00270611
-scale = Vector2(0.999707, 0.999707)
+position = Vector2(0.0111282, 0.0109863)
+rotation = 0.00270492
+scale = Vector2(0.999713, 0.999713)
 texture = ExtResource("5_mv52h")
 
 [node name="RightKnee" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/RightLeg"]
-position = Vector2(7.02008, 5.3781)
-scale = Vector2(1.00018, 1.00018)
+position = Vector2(7.02009, 5.37816)
+scale = Vector2(1.00017, 1.00017)
 texture = ExtResource("6_735yq")
 offset = Vector2(-7, -6)
 
@@ -1927,13 +1928,13 @@ texture = ExtResource("6_5fnib")
 offset = Vector2(-7.45752, -30.0759)
 
 [node name="LeftLeg" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso"]
-position = Vector2(-0.0236297, -0.0534134)
+position = Vector2(-0.0236115, -0.053524)
 rotation = -0.00331807
-scale = Vector2(0.998944, 0.998944)
+scale = Vector2(0.998946, 0.998946)
 texture = ExtResource("7_qwvak")
 
 [node name="LeftKnee" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/LeftLeg"]
-position = Vector2(-7.00159, 5.41163)
+position = Vector2(-7.00159, 5.4116)
 scale = Vector2(1.0004, 1.0004)
 texture = ExtResource("9_8cycy")
 offset = Vector2(7, -6)
@@ -1948,52 +1949,51 @@ position = Vector2(-5.24521e-06, -4.60002)
 texture = ExtResource("9_2pba2")
 
 [node name="RightElbow" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/Coat"]
-position = Vector2(14.6602, -18.1571)
-rotation = -0.125053
-scale = Vector2(0.998922, 0.998922)
+position = Vector2(14.6603, -18.157)
+rotation = -0.125222
+scale = Vector2(0.998923, 0.998923)
 texture = ExtResource("10_3ywxo")
 offset = Vector2(-17.5087, 18.4199)
 
 [node name="RightArm" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/Coat/RightElbow"]
-position = Vector2(4.09929, 17.2192)
-rotation = 0.16123
-scale = Vector2(0.999911, 0.999911)
+position = Vector2(5.19933, 17.541)
+rotation = -0.43307
+scale = Vector2(0.99991, 0.99991)
 texture = ExtResource("11_2l05x")
 offset = Vector2(-19.7922, 3.05063)
 
 [node name="LeftElbow" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/Coat"]
-position = Vector2(-17.0769, -20.0472)
-rotation = 0.171555
-scale = Vector2(0.995487, 0.995487)
+position = Vector2(-17.0906, -20.0775)
+rotation = 0.347383
+scale = Vector2(0.995486, 0.995486)
 texture = ExtResource("12_vu2m0")
 offset = Vector2(18, 20)
 
 [node name="Weapon" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/Coat/LeftElbow"]
-position = Vector2(-14.7233, 25.3554)
-rotation = -0.184623
-scale = Vector2(0.999399, 0.999374)
+position = Vector2(10.3887, 14.2681)
+rotation = -0.27571
+scale = Vector2(0.999399, 0.999375)
 texture = ExtResource("22_t2au1")
 offset = Vector2(20, -4)
 
 [node name="RightHand" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/Coat/LeftElbow/Weapon"]
-position = Vector2(69.7381, -5.66589)
-rotation = 3.03892
+position = Vector2(30.4757, -1.85753)
+rotation = 3.03889
 scale = Vector2(1.00396, -1.00399)
-skew = -0.0014993
+skew = -0.00145757
 texture = ExtResource("14_2uyc6")
 offset = Vector2(-21.7808, -3.12533)
 
 [node name="LeftArm" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso/Coat/LeftElbow"]
-position = Vector2(-4.26812, 11.6786)
-rotation = -0.109921
+position = Vector2(-5.17394, 12.1111)
+rotation = -0.361253
 scale = Vector2(0.9999, 0.9999)
 texture = ExtResource("15_0hql7")
 offset = Vector2(21.5783, 10.0035)
 
 [node name="Head" type="Sprite2D" parent="Player/EditorPreview/Transform/Torso"]
 position = Vector2(0.163597, -24.5995)
-rotation = -0.0174533
-scale = Vector2(0.999791, 0.999791)
+scale = Vector2(0.999792, 0.999792)
 texture = ExtResource("16_m686t")
 offset = Vector2(1, 22)
 
@@ -2221,6 +2221,9 @@ root_node = NodePath("../MainAnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_guau6")
 }
+
+[node name="UISound" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("39_esiug")
 
 [node name="Hitbox" type="RigidBody2D" parent="."]
 position = Vector2(-2, -21)

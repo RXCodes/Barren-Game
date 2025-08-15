@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0jmk8ybs4n4x"]
+[gd_scene load_steps=10 format=3 uid="uid://qjt5ys6tq6hr"]
 
-[ext_resource type="Texture2D" uid="uid://4godsye64tdk" path="res://ModelContents/Explosion/WhiteGradientHD.png" id="1_5gx0j"]
-[ext_resource type="Script" path="res://Models/Explosion.gd" id="1_lulrj"]
-[ext_resource type="Texture2D" uid="uid://d3o3h014v7rkf" path="res://Particles/SmokeAnimation/SmokeAnimation.png" id="2_102nx"]
-[ext_resource type="AudioStream" uid="uid://du16klf5w1lq" path="res://ModelContents/Explosion/Explosion.mp3" id="4_wj1x6"]
+[ext_resource type="Script" path="res://Models/BulletExplosionFragment.gd" id="1_081fd"]
+[ext_resource type="Texture2D" uid="uid://d3o3h014v7rkf" path="res://Particles/SmokeAnimation/SmokeAnimation.png" id="2_w4xox"]
+[ext_resource type="Texture2D" uid="uid://4godsye64tdk" path="res://ModelContents/Explosion/WhiteGradientHD.png" id="3_uuwsp"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7xrq6"]
 particles_animation = true
@@ -33,41 +32,36 @@ colors = PackedColorArray(0.605274, 0.605274, 0.605274, 1, 1, 1, 1, 1)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nrloa"]
 blend_mode = 1
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5wvo6"]
-radius = 144.031
-
-[node name="Explosion" type="Node2D"]
-script = ExtResource("1_lulrj")
+[node name="ExplosionFragment" type="Node2D"]
+script = ExtResource("1_081fd")
 
 [node name="Blast" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.72549)
 texture_filter = 1
 material = SubResource("CanvasItemMaterial_7xrq6")
-scale = Vector2(1.75, 1)
+scale = Vector2(0.6, 0.6)
 emitting = false
-amount = 40
+amount = 30
 lifetime = 3.0
 one_shot = true
-explosiveness = 1.0
+explosiveness = 0.9
 randomness = 0.3
-lifetime_randomness = 0.2
-texture = ExtResource("2_102nx")
-emission_shape = 3
-emission_rect_extents = Vector2(30, 10)
+lifetime_randomness = 0.1
+texture = ExtResource("2_w4xox")
 direction = Vector2(0, -1)
 spread = 140.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
 linear_accel_min = 10.76
 linear_accel_max = 17.44
 linear_accel_curve = SubResource("Curve_522jh")
-damping_min = 8.0
-damping_max = 20.0
+damping_min = 15.0
+damping_max = 25.0
 damping_curve = SubResource("Curve_lgja4")
-scale_amount_min = 1.5
-scale_amount_max = 3.0
+scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_rt27n")
-color = Color(0.32, 0.32, 0.32, 0.25098)
+color = Color(0.44, 0.44, 0.44, 0.380392)
 color_initial_ramp = SubResource("Gradient_7c8pj")
 anim_speed_min = 1.0
 anim_speed_max = 1.75
@@ -75,21 +69,6 @@ anim_speed_max = 1.75
 [node name="Flash" type="Sprite2D" parent="."]
 self_modulate = Color(0.950978, 0.848242, 0.383265, 1)
 material = SubResource("CanvasItemMaterial_nrloa")
-position = Vector2(0, -39)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("1_5gx0j")
-
-[node name="Sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_wj1x6")
-volume_db = -2.0
-autoplay = true
-max_distance = 3000.0
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 0
-
-[node name="Hurtbox" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -43)
-shape = SubResource("CircleShape2D_5wvo6")
-disabled = true
-debug_color = Color(0.86, 0.2924, 0.50998, 0.0823529)
+position = Vector2(0, 1)
+scale = Vector2(0.1, 0.095)
+texture = ExtResource("3_uuwsp")

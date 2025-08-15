@@ -275,6 +275,7 @@ func startSupplyDropLoop() -> void:
 			currentSupplyDropCooldown = supplyDropCooldown
 			EnemySpawner.spawnEnemy("SupplyCrate", randomPoint)
 			TextAlert.setupAlert("A supply crate has been summoned!", Color.MEDIUM_PURPLE)
+			Player.current.playUIAudio(preload("res://UI/SupplyDrop.mp3"))
 
 var currentBluePortal: BluePortal
 func startBluePortalLoop() -> void:

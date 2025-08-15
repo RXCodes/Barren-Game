@@ -9,4 +9,5 @@ func onUpgrade(amounts: Array) -> void:
 		if distancedSquared <= 450 ** 2 and distancedSquared > 75 ** 2:
 			EnemySpawner.spawnEnemy("SupplyCrate", spawnPoint)
 			TextAlert.setupAlert("A supply crate has summoned near you!", Color.DARK_ORANGE)
+			Player.current.playUIAudio(preload("res://UI/SupplyDrop.mp3"))
 			break
