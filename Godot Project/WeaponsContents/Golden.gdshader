@@ -19,7 +19,7 @@ void fragment() {
 	vec3 gold_color = vec3(2.3, 1.6, 0.6);
 	old_color.rgb = vec3(weighted_average);
 	old_color.rgb *= gold_color;
-	
+
 	// set up base parameters
 	float time = TIME * abs(speed); // Absolute time to handle both positive and negative speeds
 	float effect_cycle_duration = 1.0 + pause_duration; // total time for one cycle and pause

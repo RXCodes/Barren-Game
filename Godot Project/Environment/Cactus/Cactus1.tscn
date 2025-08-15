@@ -21,7 +21,6 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_mq506")
 
 [node name="Shadow" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.231373)
 show_behind_parent = true
 z_index = -1

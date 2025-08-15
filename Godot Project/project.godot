@@ -16,7 +16,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 [application]
 
 config/name="Barren"
-config/version="1.0"
+config/version="1.1"
 run/main_scene="res://Scenes/Intro.tscn"
 run/print_header=false
 config/features=PackedStringArray("4.3", "GL Compatibility")

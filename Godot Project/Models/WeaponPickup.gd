@@ -2,6 +2,7 @@ class_name WeaponEntity extends Node2D
 
 var pickupItem: NearbyItemsListInteractor.ItemPickup
 var despawnTime = 180.0
+var canDespawn = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,6 +22,8 @@ func _ready() -> void:
 	VillageController.addNodeToGridGroup(self)
 
 func _process(delta: float) -> void:
+	if not canDespawn:
+		return
 	despawnTime -= delta
 	if despawnTime <= 0.0:
 		if pickupItem:

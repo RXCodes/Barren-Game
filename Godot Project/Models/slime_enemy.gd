@@ -52,7 +52,7 @@ func jumpToPoint(targetPosition: Vector2, airTime: float) -> void:
 	jumping = false
 
 func physicsProcess(delta: float) -> void:
-	if not jumping:
+	if not jumping or dead:
 		return
 	# move the slime as it is jumping
 	var result = collisionRigidBody.move_and_collide(jumpNormal * 5.0)

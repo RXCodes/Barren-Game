@@ -8,7 +8,7 @@ var wormEnemy: EnemyAI
 var canHitObstacles = true
 var enemyColor: Color
 
-func _ready() -> void:
+func refreshColor() -> void:
 	if wormEnemy.variantType == EnemyAI.EnemyVariantType.ACID:
 		enemyColor = Color("#10ed00")
 	if wormEnemy.variantType == EnemyAI.EnemyVariantType.LIGHTNING:

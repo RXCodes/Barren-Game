@@ -50,6 +50,7 @@ func summonProjectile() -> void:
 	fireball.material.set_shader_parameter("brightness", 0)
 	fireball.wormEnemy = self
 	fireball.goToPosition(getTargetPosition())
+	fireball.refreshColor()
 
 func onDeath() -> void:
 	actionAnimationPlayer.stop()

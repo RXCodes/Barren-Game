@@ -61,7 +61,8 @@ static func showItemInfo() -> void:
 	itemName.show()
 
 static func hideItemInfo() -> void:
-	Crosshair.current.texture = Player.current.gunInteractor.currentWeapon.crosshairTexture
+	if Player.current.gunInteractor != null:
+		Crosshair.current.texture = Player.current.gunInteractor.currentWeapon.crosshairTexture
 	itemDescription.hide()
 	itemName.hide()
 
