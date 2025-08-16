@@ -30,8 +30,6 @@ func explode() -> void:
 	var explosion = Explosion.create($RigidBody2D/Fireball.global_position, damage, EnemyAI.HurtBoxType.PLAYER, enemyColor)
 	if is_instance_valid(wormEnemy):
 		explosion.enemySource = wormEnemy
-	else:
-		explosion.enemySource = Player.current
 	
 	queue_free()
 
@@ -41,7 +39,6 @@ func goToPosition(newTargetPosition: Vector2) -> void:
 	var normal = (newTargetPosition - global_position).normalized()
 	var trajectory = normal * min(distance, maxDistance)
 	targetPosition = global_position + trajectory
-	targetVelocity = (targetPosition - global_position) / travelTime
 	
 	# chance for the fireball to go over obstacles, avoiding collision
 	if randi_range(1, 2) == 1:
@@ -49,14 +46,15 @@ func goToPosition(newTargetPosition: Vector2) -> void:
 		canHitObstacles = false
 		$RigidBody2D/AnimationPlayer.play("SummonAir")
 		$WormIndicator/AnimationPlayer.play("Summon")
-		$WormIndicator.self_modulate = enemyColor
 		$WormIndicator.global_position = targetPosition
+		$WormIndicator.global_position.y += 50
 		$WormIndicator.show()
 	else:
 		travelTime = 1
 		$RigidBody2D/AnimationPlayer.play("Summon")
 		$WormIndicator.hide()
 	
+	targetVelocity = (targetPosition - global_position) / travelTime
 	await TimeManager.wait(travelTime)
 	explode()
 	

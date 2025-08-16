@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://babhxms1scsca"]
+[gd_scene load_steps=55 format=4 uid="uid://babhxms1scsca"]
 
 [ext_resource type="Script" path="res://HelperClasses/NodeRelations.gd" id="1_80clb"]
 [ext_resource type="Texture2D" uid="uid://bllj1st2im3pu" path="res://Environment/RockTilemap.png" id="10_q0e8j"]
@@ -43,6 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://bea0yqsiy8r2l" path="res://Environment/Decoration/WaterFountain.tscn" id="38_i01l7"]
 [ext_resource type="PackedScene" uid="uid://fsvkps20epu2" path="res://Models/SupplyCrate.tscn" id="40_7qj5u"]
 [ext_resource type="Texture2D" uid="uid://bryra10fhy4a" path="res://Environment/Sun.png" id="40_rluml"]
+[ext_resource type="PackedScene" uid="uid://n0e8t8q312gb" path="res://Models/worm_enemy.tscn" id="44_ii8pw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6j56"]
 texture = ExtResource("10_q0e8j")
@@ -771,3 +772,6 @@ script = SubResource("GDScript_farfr")
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-4.14142, 202.206)
 script = SubResource("GDScript_fuud3")
+
+[node name="Worm_Enemy" parent="." instance=ExtResource("44_ii8pw")]
+position = Vector2(250, -511)
